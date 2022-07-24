@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Cairo';
+    src: url('../fonts/Cairo-Bold.ttf');
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: 'Cairo';
+    src: url('../fonts/Cairo-Light.ttf');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Cairo';
+    src: url('../fonts/Cairo-Regular.ttf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'NotoNaskhArabic';
+    src: url('../fonts/NotoNaskhArabic-VariableFont_wght.ttf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Quran';
+    src: url('../fonts/UthmanicHafs_V20.ttf');
+    font-weight: 400;
+}

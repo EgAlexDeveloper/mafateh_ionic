@@ -1,0 +1,23 @@
+@import './fonts.css';
+
+* {
+    font-family: 'NotoNaskhArabic';
+    font-weight: 400;
+}
+
+.text {
+    /* font-family: 'Quran'; */
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0 0 10px 0;
+}
+
+.ayat {
+    font-family: 'Quran';
+    font-size: 18px;
+    font-weight: bold;
+}
+
+p {
+    margin: 0;
+}
