@@ -10,9 +10,9 @@
     list-style: none;
 }
 
-.poetry ul li {
+/* .poetry ul li {
     display: inline-block;
-}
+} */
 
 .poetry ul li:last-of-type {
     text-align: left;
