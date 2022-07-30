@@ -17,8 +17,16 @@ const Categories: React.FC = () => {
   const [cat, updateCat] = useState<Cat[]>([]);
 
   useEffect(() => {
+    return () => updateCat([])
+  }, []);
+
+  useEffect(() => {
     const starCountRef = ref(DB, 'Cats');
-    onValue(starCountRef, (snapshot) => updateCat(snapshot.val()));
+
+    onValue(starCountRef, (snapshot) => {
+      let data: Cat[] = snapshot.val() as Cat[];
+      updateCat(data!)
+    });
   }, []);
 
   return (

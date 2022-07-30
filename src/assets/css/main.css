@@ -9,13 +9,24 @@
     /* font-family: 'Quran'; */
     font-size: 18px;
     font-weight: 400;
-    margin: 0 0 10px 0;
+    /* margin: 0 0 10px 0; */
+    position: relative;
 }
+
+/* .text:after {
+    content: "";
+    position: absolute;
+} */
 
 .ayat {
     font-family: 'Quran';
     font-size: 18px;
     font-weight: bold;
+    border-bottom: solid 1px #ddd;
+    padding: 0 10px 10px 10px;
+    position: relative;
+    display: inline-block;
+    line-height: normal;
 }
 
 p {

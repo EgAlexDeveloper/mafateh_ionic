@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonListHeader, IonItem, IonLabel, IonButton, IonIcon } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonListHeader, IonItem, IonLabel, IonButton, IonIcon, IonButtons, IonBackButton } from '@ionic/react';
 import { Fragment, useEffect, useState } from 'react';
 
 import * as icons from 'ionicons/icons'
@@ -24,6 +24,9 @@ const Posts: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" />
+          </IonButtons>
           <IonTitle>أوراد {cat_name}</IonTitle>
         </IonToolbar>
       </IonHeader>

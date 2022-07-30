@@ -1,0 +1,19 @@
+.poetry {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.poetry ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.poetry ul li {
+    display: inline-block;
+}
+
+.poetry ul li:last-of-type {
+    text-align: left;
+}

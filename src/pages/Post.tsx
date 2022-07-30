@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonGrid, IonCol, IonRow } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonGrid, IonCol, IonRow, IonButton, IonIcon, IonButtons, IonBackButton } from '@ionic/react';
 import { useEffect, useState } from 'react';
 
 import DB from '../firebase';
@@ -7,10 +7,13 @@ import { useParams } from 'react-router';
 
 import Text from '../components/Text';
 import Ayat from '../components/Ayat';
+import Poetry from '../components/Poetry';
+
+import * as icons from 'ionicons/icons';
 
 type Detail = {
   type: 1 | 2 | 3;
-  details: string;
+  details: string | string[][];
 }
 
 type PostType = {
@@ -19,18 +22,29 @@ type PostType = {
 };
 
 const Post: React.FC = () => {
-  const [post, updatePost] = useState<PostType>();
+  const [post, updatePost] = useState<PostType | null>();
   const { post_name } = useParams() as { post_name: string; };
 
   useEffect(() => {
+    return () => updatePost(null)
+  }, []);
+
+  useEffect(() => {
     const starCountRef = ref(DB, 'Content');
-    onValue(starCountRef, (snapshot) => updatePost(snapshot.val()[1]));
+
+    onValue(starCountRef, (snapshot) => {
+      let data: PostType[] = snapshot.val() as PostType[];
+      updatePost(data.find((post: PostType) => post?.name! == post_name)!);
+    });
   }, []);
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/" />
+          </IonButtons>
           <IonTitle>{post_name}</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -41,11 +55,15 @@ const Post: React.FC = () => {
               post?.details.map((item, i) => (
                 <IonCol key={i} size='12'>
                   {
-                    item.type == 1 && <Text text={item.details} />
+                    item.type == 1 && <Text text={item.details as string} />
                   }
 
                   {
-                    item.type == 2 && <Ayat text={item.details} />
+                    item.type == 2 && <Ayat text={item.details as string} />
+                  }
+
+                  {
+                    item.type == 3 && <Poetry list={item.details as string[][]} />
                   }
                 </IonCol>
               ))
