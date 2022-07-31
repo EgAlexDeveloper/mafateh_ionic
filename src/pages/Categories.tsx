@@ -6,12 +6,7 @@ import * as icons from 'ionicons/icons';
 import './Cat.css';
 import { onValue, ref } from "firebase/database";
 import DB from '../firebase';
-
-type Cat = {
-  name: string;
-  count: number;
-  id: number;
-};
+import { Cat } from './types';
 
 const Categories: React.FC = () => {
   const [cat, updateCat] = useState<Cat[]>([]);

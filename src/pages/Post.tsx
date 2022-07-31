@@ -10,16 +10,7 @@ import Ayat from '../components/Ayat';
 import Poetry from '../components/Poetry';
 
 import * as icons from 'ionicons/icons';
-
-type Detail = {
-  type: 1 | 2 | 3;
-  details: string | string[][];
-}
-
-type PostType = {
-  name: string;
-  details: Detail[]
-};
+import { PostType } from './types';
 
 const Post: React.FC = () => {
   const [post, updatePost] = useState<PostType | null>();

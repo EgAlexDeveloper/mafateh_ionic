@@ -26,10 +26,23 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import { FC, useEffect } from 'react';
+import { onValue, ref } from 'firebase/database';
+import DB from './firebase';
+import { saveData } from './db';
+import { AllData, Cat } from './pages/types';
 
 setupIonicReact();
 
-const App: React.FC = () => {
+const App: FC = () => {
+  useEffect(() => {
+    const starCountRef = ref(DB, '/');
+
+    onValue(starCountRef, (snapshot) => {
+      saveData(snapshot.val() as AllData, 'all')
+    });
+  }, []);
+
   return (
     <IonApp>
       <IonReactRouter>
