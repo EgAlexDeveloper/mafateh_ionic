@@ -6,7 +6,11 @@ type Props = {
 
 const Ayat: FC<Props> = (props: Props) => {
     return (<>
-        <p className="ayat">{props.text}</p>
+        <p className="ayat">
+            <span className="bahij">﴿</span>
+            <>{props.text}</>
+            <span className="bahij">﴾</span>
+        </p>
     </>)
 }
 

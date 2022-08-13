@@ -27,3 +27,9 @@
     src: url('../fonts/UthmanicHafs_V20.ttf');
     font-weight: 400;
 }
+
+@font-face {
+    font-family: 'Bahij';
+    src: url('../fonts/Bahij_Uthman_Taha-Bold.ttf');
+    font-weight: 900;
+}
