@@ -10,7 +10,7 @@ import Ayat from '../components/Ayat';
 import Poetry from '../components/Poetry';
 
 import * as icons from 'ionicons/icons';
-import { PostType } from './types';
+import { MixedType, PostType } from './types';
 
 const Post: React.FC = () => {
   const [post, updatePost] = useState<PostType | null>();
@@ -55,6 +55,25 @@ const Post: React.FC = () => {
 
                   {
                     item.type == 3 && <Poetry list={item.details as string[][]} />
+                  }
+
+                  {
+                    item.type == 4 &&
+                    <div className='mixedContent'>
+                      {
+                        [...item.details as MixedType[]].map((detail: MixedType, i) => (
+                          <>
+                            {
+                              detail.type == 1 && <Text text={detail.text as string} />
+                            }
+
+                            {
+                              detail.type == 2 && <Ayat text={detail.text as string} />
+                            }
+                          </>
+                        ))
+                      }
+                    </div>
                   }
                 </IonCol>
               ))

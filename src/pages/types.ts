@@ -3,9 +3,14 @@ export type Cat = {
     id: number;
 };
 
+export type MixedType = {
+    text: string; 
+    type: 1 | 2 
+}
+
 export type Detail = {
-    type: 1 | 2 | 3;
-    details: string | string[][];
+    type: 1 | 2 | 3 | 4;
+    details: string | string[][] | MixedType[];
 }
 
 export type PostType = {
