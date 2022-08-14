@@ -9,7 +9,7 @@ export type MixedType = {
 }
 
 export type Detail = {
-    type: 1 | 2 | 3 | 4;
+    type: 1 | 2 | 3 | 4 | 33;
     details: string | string[][] | MixedType[];
 }
 

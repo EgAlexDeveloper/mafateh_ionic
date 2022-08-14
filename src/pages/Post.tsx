@@ -54,7 +54,7 @@ const Post: React.FC = () => {
                   }
 
                   {
-                    item.type == 3 && <Poetry list={item.details as string[][]} />
+                    (item.type == 3 || item.type == 33) && <Poetry type={item.type} list={item.details as string[][]} />
                   }
 
                   {

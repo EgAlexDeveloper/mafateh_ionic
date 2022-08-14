@@ -2,12 +2,13 @@ import { FC } from "react";
 import './poetry.css';
 
 type Props = {
-    list: string[][]
+    list: string[][],
+    type: 3 | 33
 };
 
 const Poetry: FC<Props> = (props: Props) => {
     return (
-        <ul className="poetry">
+        <ul className={`poetry type_${props.type}`}>
             {
                 props.list.map((subList) => (
                     <ul key={new Date().getTime()}>
