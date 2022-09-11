@@ -8,7 +8,7 @@ const Ayat: FC<Props> = (props: Props) => {
     return (<>
         <p className="ayat">
             <span className="bahij">﴿</span>
-            <>{props.text}</>
+            <span>{props.text}</span>
             <span className="bahij">﴾</span>
         </p>
     </>)

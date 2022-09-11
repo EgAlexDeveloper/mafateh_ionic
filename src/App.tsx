@@ -30,7 +30,9 @@ import { FC, useEffect } from 'react';
 import { onValue, ref } from 'firebase/database';
 import DB from './firebase';
 import { saveData } from './db';
-import { AllData, Cat } from './pages/types';
+import { AllData } from './pages/types';
+
+import './Styles.css';
 
 setupIonicReact();
 

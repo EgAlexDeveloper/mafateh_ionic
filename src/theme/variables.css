@@ -74,9 +74,14 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /* Custom */
+  --custom-color-mafateh-green: #307136;
+  --custom-color-mafateh-light-green: #b8debb;
+  --custom-color-mafateh-dark-green: #0f4746;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: 'light dark') {
   /*
    * Dark Colors
    * -------------------------------------------

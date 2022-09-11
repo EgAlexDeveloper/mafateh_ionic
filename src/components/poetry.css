@@ -3,6 +3,8 @@
     margin: 0 0 20px 0;
     list-style: none;
     border-bottom: solid 1px #ddd;
+    font-family: 'NotoNaskhArabic';
+    font-size: 18px;
 }
 
 .poetry ul {
@@ -10,10 +12,6 @@
     margin: 0;
     list-style: none;
 }
-
-/* .poetry ul li {
-    display: inline-block;
-} */
 
 .poetry ul li:last-of-type {
     text-align: left;

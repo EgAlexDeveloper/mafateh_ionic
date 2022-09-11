@@ -11,6 +11,7 @@ import Poetry from '../components/Poetry';
 
 import * as icons from 'ionicons/icons';
 import { MixedType, PostType } from './types';
+import Header from '../components/Header';
 
 const Post: React.FC = () => {
   const [post, updatePost] = useState<PostType | null>();
@@ -31,14 +32,8 @@ const Post: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/" />
-          </IonButtons>
-          <IonTitle>{post_name}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Header title={post_name} hasBack={true} />
+
       <IonContent fullscreen>
         <IonGrid>
           <IonRow>

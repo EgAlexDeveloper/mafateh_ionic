@@ -1,0 +1,18 @@
+ion-title {
+    font-weight: bold;
+    color: var(--custom-color-mafateh-green)
+}
+
+ion-label {
+    /* font-weight: bold; */
+    font-size: 18px;
+    color: var(--custom-color-mafateh-green)
+}
+
+.button {
+    color: var(--custom-color-mafateh-dark-green)
+}
+
+ion-list-header {
+    border-color: var(--custom-color-mafateh-dark-green)
+}

@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonLabel, IonListHeader, IonButton, IonIcon } from '@ionic/react';
+import { IonContent, IonPage, IonList, IonLabel, IonListHeader, IonButton, IonIcon } from '@ionic/react';
 import { useEffect, useState } from 'react';
 
 import * as icons from 'ionicons/icons';
@@ -7,8 +7,11 @@ import './Cat.css';
 import { onValue, ref } from "firebase/database";
 import DB from '../firebase';
 import { Cat } from './types';
+import Header from '../components/Header';
+import { useHistory } from 'react-router-dom';
 
 const Categories: React.FC = () => {
+  const history = useHistory();
   const [cat, updateCat] = useState<Cat[]>([]);
 
   useEffect(() => {
@@ -26,23 +29,18 @@ const Categories: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>فهرس الأوراد</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <Header title={'فهرس الأوراد'} hasSettings={false} />
+
       <IonContent fullscreen>
         <IonList>
           {
             cat.map(item => (
-              <IonItem key={item.id} lines="none" routerLink={`/posts/${item.id}/${item.name}`}>
-                <IonListHeader lines="full" key={item.id}>
-                  <IonLabel>{item.name}</IonLabel>
-                  <IonButton>
-                    <IonIcon icon={icons.chevronBackOutline} />
-                  </IonButton>
-                </IonListHeader>
-              </IonItem >
+              <IonListHeader lines="full" key={item.id} onClick={() => history.replace(`/posts/${item.id}/${item.name}`)}>
+                <IonLabel className="ion-bold">{item.name}</IonLabel>
+                <IonButton>
+                  <IonIcon icon={icons.chevronBackOutline} />
+                </IonButton>
+              </IonListHeader>
             ))
           }
         </IonList>

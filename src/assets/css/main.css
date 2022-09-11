@@ -1,49 +1,36 @@
 @import './fonts.css';
 
-* {
-    font-family: 'NotoNaskhArabic';
-    font-weight: 400;
-}
-
 .text {
-    /* font-family: 'Quran'; */
-    font-size: 18px;
+    font-family: 'NotoNaskhArabic';
+    font-size: 20px;
     font-weight: 400;
-    /* margin: 0 0 10px 0; */
     position: relative;
 }
-
-/* .text:after {
-    content: "";
-    position: absolute;
-} */
 
 .ayat {
     font-family: 'Quran';
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     border-bottom: solid 1px #ddd;
-    padding: 0 0 10px 0;
     position: relative;
     display: inline-block;
     line-height: normal;
+    margin: 0;
+    color: var(--custom-color-mafateh-green)
 }
 
-p {
+p:not(.ayat) {
     margin: 0;
+    font-family: 'NotoNaskhArabic';
 }
 
 .bahij {
     font-family: "Bahij";
 }
 
-.mixedContent {
-    display: flex;
-    align-items: baseline;
-}
-
 .mixedContent p {
-    margin-left: 5px;
+    margin-left: 10px;
+    display: inline;
 }
 
 .mixedContent p:last-of-type {

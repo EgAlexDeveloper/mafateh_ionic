@@ -25,6 +25,7 @@
     "@types/react-dom": "^18.0.6",
     "@types/react-router": "^5.1.11",
     "@types/react-router-dom": "^5.1.7",
+    "cordova-res": "^0.15.4",
     "firebase": "^9.9.1",
     "ionicons": "^5.4.0",
     "ms-react-reactive-form": "^1.1.2",
