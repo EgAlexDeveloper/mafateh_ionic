@@ -2,7 +2,7 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonListH
 import { Fragment, useEffect, useState } from 'react';
 
 import * as icons from 'ionicons/icons'
-import DB from '../firebase';
+import DB from '../firebase/fetch';
 import { onValue, ref } from 'firebase/database';
 import { useParams } from 'react-router';
 import { SubCat } from './types';
@@ -21,13 +21,13 @@ const Posts: React.FC = () => {
 
   return (
     <IonPage>
-      <Header title={'أوراد' + cat_name} hasBack={true} />
+      <Header title={'أوراد' + cat_name} hasBack={true} backRoute="/categories" />
 
       <IonContent fullscreen>
         <IonList>
           {
             sub_cat.map((item, i) => (
-              <IonListHeader lines="full" key={item.cat_id} onClick={() => history.replace(`/post/${item.name}`)}>
+              <IonListHeader lines="full" key={item.cat_id} onClick={() => history.replace(`/post/${cat_id}/${cat_name}/${item.name}`)}>
                 <IonLabel>{item.name}</IonLabel>
                 <IonButton>
                   <IonIcon icon={icons.chevronBackOutline} />

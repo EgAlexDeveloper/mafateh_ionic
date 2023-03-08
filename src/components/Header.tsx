@@ -1,11 +1,12 @@
-import {  IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon } from '@ionic/react';
+import { IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon } from '@ionic/react';
 import { settingsSharp } from 'ionicons/icons';
 import { FC } from 'react';
 
 type Props = {
     title: string,
     hasSettings?: boolean,
-    hasBack?: boolean
+    hasBack?: boolean,
+    backRoute?: string
 }
 
 const Header: FC<Props> = (props: Props) => {
@@ -20,14 +21,14 @@ const Header: FC<Props> = (props: Props) => {
                         </IonButton>
                     </IonButtons>
                 }
-                
+
                 {
                     props.hasBack &&
                     <IonButtons slot="start">
-                        <IonBackButton defaultHref="/" />
+                        <IonBackButton defaultHref={props.backRoute!} />
                     </IonButtons>
                 }
-                
+
                 <IonTitle>{props.title}</IonTitle>
             </IonToolbar>
 

@@ -9,10 +9,21 @@ ion-label {
     color: var(--custom-color-mafateh-green)
 }
 
-.button {
+.button,
+.button-native {
     color: var(--custom-color-mafateh-dark-green)
 }
 
 ion-list-header {
     border-color: var(--custom-color-mafateh-dark-green)
+}
+
+.error {
+    color: var(--ion-color-danger);
+    padding-inline: 20px;
+    font-size: 12px;
+}
+
+.mb-2 {
+    margin-bottom: 0.2em;
 }

@@ -1,7 +1,7 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonGrid, IonCol, IonRow, IonButton, IonIcon, IonButtons, IonBackButton } from '@ionic/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 
-import DB from '../firebase';
+import DB from '../firebase/fetch';
 import { onValue, ref } from 'firebase/database';
 import { useParams } from 'react-router';
 
@@ -9,13 +9,12 @@ import Text from '../components/Text';
 import Ayat from '../components/Ayat';
 import Poetry from '../components/Poetry';
 
-import * as icons from 'ionicons/icons';
 import { MixedType, PostType } from './types';
 import Header from '../components/Header';
 
 const Post: React.FC = () => {
   const [post, updatePost] = useState<PostType | null>();
-  const { post_name } = useParams() as { post_name: string; };
+  const { cat_name, cat_id, post_name } = useParams() as { cat_name: string; cat_id: string; post_name: string };
 
   useEffect(() => {
     return () => updatePost(null)
@@ -32,7 +31,7 @@ const Post: React.FC = () => {
 
   return (
     <IonPage>
-      <Header title={post_name} hasBack={true} />
+      <Header title={post_name} hasBack={true} backRoute={`/posts/${cat_id}/${cat_name}`} />
 
       <IonContent fullscreen>
         <IonGrid>
@@ -57,7 +56,7 @@ const Post: React.FC = () => {
                     <div className='mixedContent'>
                       {
                         [...item.details as MixedType[]].map((detail: MixedType, i) => (
-                          <>
+                          <Fragment key={new Date().getTime()}>
                             {
                               detail.type == 1 && <Text text={detail.text as string} />
                             }
@@ -65,7 +64,7 @@ const Post: React.FC = () => {
                             {
                               detail.type == 2 && <Ayat text={detail.text as string} />
                             }
-                          </>
+                          </Fragment>
                         ))
                       }
                     </div>
