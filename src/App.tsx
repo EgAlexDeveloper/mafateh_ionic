@@ -25,40 +25,75 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
 import './theme/variables.css';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import './Styles.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import { fetchData, saveData } from './db';
+import { AuthContext } from './context/auth.context';
+import { onValue, ref } from 'firebase/database';
+import { AllData } from './pages/types';
+import DB from './firebase/fetch';
 
 setupIonicReact();
 
 const App: FC = () => {
+  const [isLoggedIn, updateIsLoggedIn] = useState<boolean>(false);
+  const [isReady, updateIsReady] = useState<boolean>(false);
+  const [canRender, updateCanRender] = useState<boolean>(false);
+
+  useEffect(() => {
+    const starCountRef = ref(DB, '/');
+    onValue(starCountRef, (snapshot) => {
+      saveData(snapshot.val() as AllData, 'all');
+      updateCanRender(true);
+    });
+  }, [isReady]);
+
+  useEffect(() => {
+    fetchData('user')
+      .then(res => {
+        if (res) {
+          // let { email, stsTokenManager } = JSON.parse(res);
+          updateIsLoggedIn(true);
+        }
+      })
+      .catch(err => { })
+      .finally(() => updateIsReady(true));
+  }, []);
+
   return (
-    <IonApp>
-      <IonReactRouter>
-        <IonRouterOutlet>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          <Route exact path="/categories">
-            <Categories />
-          </Route>
-          <Route exact path="/posts/:cat_id/:cat_name">
-            <Posts />
-          </Route>
-          <Route exact path="/post/:cat_id/:cat_name/:post_name">
-            <Post />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/login" />
-          </Route>
-        </IonRouterOutlet>
-      </IonReactRouter>
-    </IonApp>
+    <AuthContext.Provider value={{ isLoggedIn: isLoggedIn }}>
+      <IonApp>
+        {
+          canRender == true &&
+          <IonReactRouter>
+            <IonRouterOutlet>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+              <Route exact path="/register">
+                <Register />
+              </Route>
+
+              <Route exact path="/categories">
+                <Categories />
+              </Route>
+              <Route exact path="/posts/:cat_id/:cat_name">
+                <Posts />
+              </Route>
+              <Route exact path="/post/:cat_id/:cat_name/:post_name">
+                <Post />
+              </Route>
+              <Route exact path="/">
+                <Redirect to={!isLoggedIn ? '/login' : '/categories'} />
+              </Route>
+            </IonRouterOutlet>
+          </IonReactRouter>
+        }
+      </IonApp>
+    </AuthContext.Provider >
   );
 }
 

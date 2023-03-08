@@ -1,5 +1,5 @@
 import { IonContent, IonPage, IonList, IonLabel, IonListHeader, IonButton, IonIcon } from '@ionic/react';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import * as icons from 'ionicons/icons';
 
@@ -9,31 +9,30 @@ import DB from '../firebase/fetch';
 import { AllData, Cat } from './types';
 import Header from '../components/Header';
 import { useHistory } from 'react-router-dom';
-import { saveData } from '../db';
+import { fetchData } from '../db';
+import { AuthContext } from '../context/auth.context';
 
 const Categories: React.FC = () => {
   const history = useHistory();
+  const [isLoggedIn, updateIsLoggedIn] = useState<boolean>(false);
   const [cat, updateCat] = useState<Cat[]>([]);
+  const auth = useContext(AuthContext);
 
   useEffect(() => {
-    const starCountRef = ref(DB, '/');
+    fetchData('all')
+      .then((res: AllData) => {
+        let cat: Cat[] = res.Cats;
+        if (!isLoggedIn) cat = cat.filter(x => !x.is_private);
+        updateCat(cat)
+      })
+  }, [isLoggedIn]);
 
-    onValue(starCountRef, (snapshot) => {
-      saveData(snapshot.val() as AllData, 'all')
-    });
-  }, []);
+  useEffect(() => {
+    updateIsLoggedIn(auth.isLoggedIn);
+  }, [auth]);
 
   useEffect(() => {
     return () => updateCat([])
-  }, []);
-
-  useEffect(() => {
-    const starCountRef = ref(DB, 'Cats');
-
-    onValue(starCountRef, (snapshot) => {
-      let data: Cat[] = snapshot.val() as Cat[];
-      updateCat(data!)
-    });
   }, []);
 
   return (

@@ -1,11 +1,13 @@
-import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonLabel, IonList, IonNavLink, IonPage, IonRow, IonTabButton, IonTitle, IonToolbar } from "@ionic/react";
-import { FC, FormEvent, useState } from "react";
+import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonList, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
+import { FC, useState } from "react";
 
 import { FormGroup, FormControl, Validators, BaseValidator } from 'ms-react-reactive-form';
 import { signin } from "../firebase/auth";
 import { LoginPayload } from "../firebase/types";
-import Register from "./Register";
+
 import { useHistory } from "react-router-dom";
+import { saveData } from "../db";
+import { UserCredential } from "firebase/auth";
 
 type Props = {};
 
@@ -32,11 +34,12 @@ const Login: FC<Props> = (props: Props) => {
                 let res = validate.result(controls);
                 if (res.form.validity) {
                     signin(res.payload as LoginPayload)
-                        .then(res => { })
+                        .then((res: UserCredential) => {
+                            saveData(JSON.stringify(res.user), 'user');
+                            history.replace('/categories');
+                        })
                         .catch(error => {
                             const errorMessage = error.code;
-
-                            console.log(errorMessage)
 
                             if (errorMessage == 'auth/too-many-requests') update_TOO_MANY_REQUESTS("تم ادخال البريد الاكتروني او كلمة المرور اكثر من مرة بطريقة خاطأ حاول في وقت لاحق")
                             if (errorMessage == 'auth/wrong-password') update_INVALID_PASSWORD("كلمة المرور المدخلة غير مرتبطة بالابريد الالكتروني المدخل")
