@@ -1,33 +1,35 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonGrid, IonCol, IonRow, IonButton, IonIcon, IonButtons, IonBackButton } from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonCol, IonRow } from '@ionic/react';
 import { useEffect, useState, Fragment } from 'react';
 
-import DB from '../firebase/fetch';
-import { onValue, ref } from 'firebase/database';
 import { useParams } from 'react-router';
 
 import Text from '../components/Text';
 import Ayat from '../components/Ayat';
 import Poetry from '../components/Poetry';
 
-import { MixedType, PostType } from './types';
+import { AllData, MixedType, PostDetails } from './types';
 import Header from '../components/Header';
+import { fetchData } from '../db';
 
 const Post: React.FC = () => {
-  const [post, updatePost] = useState<PostType | null>();
+  const [post, updatePost] = useState<PostDetails | null>();
   const { cat_name, cat_id, post_name } = useParams() as { cat_name: string; cat_id: string; post_name: string };
+
+  useEffect(() => {
+    filterPost();
+  }, []);
 
   useEffect(() => {
     return () => updatePost(null)
   }, []);
 
-  useEffect(() => {
-    const starCountRef = ref(DB, 'Content');
-
-    onValue(starCountRef, (snapshot) => {
-      let data: PostType[] = snapshot.val() as PostType[];
-      updatePost(data.find((post: PostType) => post?.name! == post_name)!);
-    });
-  }, []);
+  const filterPost = (): void => {
+    fetchData('all')
+      .then((res: AllData) => {
+        let details: PostDetails = res.Content.find((item: PostDetails) => item && item?.name! == post_name)!;
+        updatePost(details);
+      });
+  }
 
   return (
     <IonPage>
@@ -37,39 +39,41 @@ const Post: React.FC = () => {
         <IonGrid>
           <IonRow>
             {
-              post?.details.map((item, i) => (
-                <IonCol key={i} size='12'>
-                  {
-                    item.type == 1 && <Text text={item.details as string} />
-                  }
+              post?.details!.map((item, i) => (
+                <Fragment key={new Date().getTime()}>
+                  <IonCol size='12'>
+                    {
+                      item.type == 1 && <Text text={item.details as string} />
+                    }
 
-                  {
-                    item.type == 2 && <Ayat text={item.details as string} />
-                  }
+                    {
+                      item.type == 2 && <Ayat text={item.details as string} />
+                    }
 
-                  {
-                    (item.type == 3 || item.type == 33) && <Poetry type={item.type} list={item.details as string[][]} />
-                  }
+                    {
+                      (item.type == 3 || item.type == 33) && <Poetry type={item.type} list={item.details as string[][]} />
+                    }
 
-                  {
-                    item.type == 4 &&
-                    <div className='mixedContent'>
-                      {
-                        [...item.details as MixedType[]].map((detail: MixedType, i) => (
-                          <Fragment key={new Date().getTime()}>
-                            {
-                              detail.type == 1 && <Text text={detail.text as string} />
-                            }
+                    {
+                      item.type == 4 &&
+                      <div className='mixedContent'>
+                        {
+                          [...item.details as MixedType[]].map((detail: MixedType, i) => (
+                            <Fragment key={new Date().getTime()}>
+                              {
+                                detail.type == 1 && <Text text={detail.text as string} />
+                              }
 
-                            {
-                              detail.type == 2 && <Ayat text={detail.text as string} />
-                            }
-                          </Fragment>
-                        ))
-                      }
-                    </div>
-                  }
-                </IonCol>
+                              {
+                                detail.type == 2 && <Ayat text={detail.text as string} />
+                              }
+                            </Fragment>
+                          ))
+                        }
+                      </div>
+                    }
+                  </IonCol>
+                </Fragment>
               ))
             }
           </IonRow>

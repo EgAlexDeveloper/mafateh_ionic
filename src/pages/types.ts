@@ -14,13 +14,12 @@ export type Detail = {
     details: string | string[][] | MixedType[];
 }
 
-export type PostType = {
+export type PostDetails = {
     name: string;
-    details: Detail[],
-    is_private?: boolean
+    details: Detail[]
 };
 
-export type SubCat = {
+export type Post = {
     name: string;
     cat_id: string;
     is_private?: boolean
@@ -28,6 +27,6 @@ export type SubCat = {
 
 export type AllData = {
     Cats: Cat[],
-    Content: PostType[],
-    Posts: SubCat[]
+    Content: PostDetails[],
+    Posts: Post[]
 }

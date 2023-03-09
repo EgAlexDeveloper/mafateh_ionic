@@ -14,26 +14,23 @@ import { AuthContext } from '../context/auth.context';
 
 const Categories: React.FC = () => {
   const history = useHistory();
-  const [isLoggedIn, updateIsLoggedIn] = useState<boolean>(false);
+  const authContext = useContext(AuthContext);
   const [cat, updateCat] = useState<Cat[]>([]);
-  const auth = useContext(AuthContext);
 
   useEffect(() => {
+    filterCats(authContext!.getIsLoggedInState());
+  }, [authContext!.getIsLoggedInState]);
+
+  useEffect(() => {
+    return () => updateCat([]);
+  }, []);
+
+  const filterCats = (isLoggedIn: boolean): void => {
     fetchData('all')
       .then((res: AllData) => {
-        let cat: Cat[] = res.Cats;
-        if (!isLoggedIn) cat = cat.filter(x => !x.is_private);
-        updateCat(cat)
-      })
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    updateIsLoggedIn(auth.isLoggedIn);
-  }, [auth]);
-
-  useEffect(() => {
-    return () => updateCat([])
-  }, []);
+        updateCat(isLoggedIn ? [...res.Cats] : [...res.Cats.filter(x => !x.is_private)]);
+      });
+  }
 
   return (
     <IonPage>

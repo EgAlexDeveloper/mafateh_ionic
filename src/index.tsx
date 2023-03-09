@@ -5,9 +5,10 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
 import './assets/css/main.css';
+import AuhtProvider from './context/auth.context';
 
 const rootNode = document.getElementById('root');
-ReactDOM.render(<App />, rootNode);
+ReactDOM.render(<AuhtProvider><App /></AuhtProvider>, rootNode);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

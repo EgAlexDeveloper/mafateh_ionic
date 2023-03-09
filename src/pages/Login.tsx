@@ -1,5 +1,5 @@
 import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonList, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 
 import { FormGroup, FormControl, Validators, BaseValidator } from 'ms-react-reactive-form';
 import { signin } from "../firebase/auth";
@@ -8,11 +8,13 @@ import { LoginPayload } from "../firebase/types";
 import { useHistory } from "react-router-dom";
 import { saveData } from "../db";
 import { UserCredential } from "firebase/auth";
+import { AuthContext } from "../context/auth.context";
 
 type Props = {};
 
 const Login: FC<Props> = (props: Props) => {
     const history = useHistory();
+    const authContext = useContext(AuthContext);
 
     const form: FormGroup = new FormGroup({
         email: new FormControl('eng.moustafa.it@gmail.com', [Validators.required(), Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
@@ -36,6 +38,8 @@ const Login: FC<Props> = (props: Props) => {
                     signin(res.payload as LoginPayload)
                         .then((res: UserCredential) => {
                             saveData(JSON.stringify(res.user), 'user');
+                            authContext?.updateIsLoggedInState(true);
+                            authContext?.updateUserState(res);
                             history.replace('/categories');
                         })
                         .catch(error => {
