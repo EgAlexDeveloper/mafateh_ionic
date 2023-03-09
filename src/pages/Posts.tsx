@@ -27,9 +27,8 @@ const Posts: React.FC = () => {
     fetchData('all')
       .then((res: AllData) => {
         let allPosts: Post[] = res.Posts.filter((item: Post) => item && item.cat_id == cat_id)!;
-        if (!isLoggedIn) allPosts = posts.filter(x => !x.is_private);
 
-        updatePost(allPosts);
+        updatePost(isLoggedIn ? [...allPosts] : [...allPosts.filter(x => !x.is_private)]);
       });
   }
 

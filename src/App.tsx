@@ -73,9 +73,10 @@ const App: FC = () => {
             <Route exact path="/login">
               <Login />
             </Route>
-            <Route exact path="/register">
+            
+            {/* <Route exact path="/register">
               <Register />
-            </Route>
+            </Route> */}
 
             <Route exact path="/categories">
               <Categories />

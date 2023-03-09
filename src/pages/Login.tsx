@@ -132,9 +132,9 @@ const Login: FC<Props> = (props: Props) => {
 
                         <IonRow>
                             <IonCol size="12">
-                                <IonButton expand="block" fill="clear" onClick={() => history.replace('/register')} className="ion-text-center">
+                                {/* <IonButton expand="block" fill="clear" onClick={() => history.replace('/register')} className="ion-text-center">
                                     تسجيل مستخدم جديد
-                                </IonButton>
+                                </IonButton> */}
 
                                 <IonButton expand="block" fill="clear" onClick={() => history.replace('/categories')} className="ion-text-center">
                                     الإستمرار بدون تسجيل
