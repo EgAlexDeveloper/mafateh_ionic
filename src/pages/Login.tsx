@@ -9,6 +9,7 @@ import { useHistory } from "react-router-dom";
 import { saveData } from "../db";
 import { UserCredential } from "firebase/auth";
 import { AuthContext } from "../context/auth.context";
+import messages from "../assets/messages";
 
 type Props = {};
 
@@ -17,7 +18,7 @@ const Login: FC<Props> = (props: Props) => {
     const authContext = useContext(AuthContext);
 
     const form: FormGroup = new FormGroup({
-        email: new FormControl('eng.moustafa.it@gmail.com', [Validators.required(), Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
+        email: new FormControl('', [Validators.required(), Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
         password: new FormControl('', [Validators.required()])
     });
 
@@ -68,7 +69,7 @@ const Login: FC<Props> = (props: Props) => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>تسجيل الدخول</IonTitle>
+                    <IonTitle>{messages.LOGIN}</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
@@ -79,7 +80,7 @@ const Login: FC<Props> = (props: Props) => {
                                 <IonList>
                                     <IonItem className="mb-2">
                                         <IonInput
-                                            placeholder="البريد الإلكتروني"
+                                            placeholder={messages.EMAIL_ADDRESS}
                                             type="email"
                                             value={formState.controls.email.value}
                                             onIonChange={(e: CustomEvent<any>) => { changeHandler(e, 'email') }}
@@ -89,7 +90,7 @@ const Login: FC<Props> = (props: Props) => {
 
                                     {
                                         !formState.controls.email.validity &&
-                                        <span className="error">ادخل بريد الكتروني صحيح</span>
+                                        <span className="error">{messages.WRONGE_EMAIL_ADDRESS}</span>
                                     }
 
                                     {
@@ -99,7 +100,7 @@ const Login: FC<Props> = (props: Props) => {
 
                                     <IonItem className="mb-2">
                                         <IonInput
-                                            placeholder="كلمة المرور"
+                                            placeholder={messages.PASSWORD}
                                             type="password"
                                             value={formState.controls.password.value}
                                             onIonChange={(e: any) => changeHandler(e, 'password')}
@@ -109,7 +110,7 @@ const Login: FC<Props> = (props: Props) => {
 
                                     {
                                         !formState.controls.password.validity &&
-                                        <div className="error">ادخل كلمة مرور صحيحة</div>
+                                        <span className="error">{messages.WRONGE_PASSWORD}</span>
                                     }
 
                                     {
@@ -126,18 +127,18 @@ const Login: FC<Props> = (props: Props) => {
                         </IonRow>
                         <IonRow>
                             <IonCol size="12" size-md>
-                                <IonButton color="success" onClick={onSubmit} expand="block" fill="solid">الدخول</IonButton>
+                                <IonButton color="success" onClick={onSubmit} expand="block" fill="solid">{messages.LOGIN}</IonButton>
                             </IonCol>
                         </IonRow>
 
                         <IonRow>
                             <IonCol size="12">
                                 {/* <IonButton expand="block" fill="clear" onClick={() => history.replace('/register')} className="ion-text-center">
-                                    تسجيل مستخدم جديد
+                                   {messages.REGISTER}
                                 </IonButton> */}
 
                                 <IonButton expand="block" fill="clear" onClick={() => history.replace('/categories')} className="ion-text-center">
-                                    الإستمرار بدون تسجيل
+                                    {messages.ACCESS_AS_GUEST}
                                 </IonButton>
                             </IonCol>
                         </IonRow>

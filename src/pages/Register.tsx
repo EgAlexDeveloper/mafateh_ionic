@@ -5,6 +5,7 @@ import { FormGroup, FormControl, Validators, BaseValidator } from 'ms-react-reac
 import { register, signin } from "../firebase/auth";
 import { LoginPayload } from "../firebase/types";
 import { useHistory } from "react-router-dom";
+import messages from "../assets/messages";
 
 type Props = {};
 
@@ -12,8 +13,8 @@ const Register: FC<Props> = (props: Props) => {
     const history = useHistory();
 
     const form: FormGroup = new FormGroup({
-        email: new FormControl('eng.moustafa.it@gmail.com', [Validators.required(), Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
-        password: new FormControl('bebaP@$$w0rd', [Validators.required()])
+        email: new FormControl('', [Validators.required(), Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]),
+        password: new FormControl('', [Validators.required()])
     });
 
     const [formState, updateFormState] = useState<FormGroup>(form);
@@ -29,7 +30,7 @@ const Register: FC<Props> = (props: Props) => {
                 if (res.form.validity) {
                     register(res.payload as LoginPayload)
                         .then(res => history.replace('/login'))
-                        .catch(error => updateServerError('هذا البريد الالكتروني مسجل من قبل'));
+                        .catch(error => updateServerError(messages.REGISTERED_EMAIL));
                 } else {
                     updateFormState({ ...res.form })
                 }
@@ -46,7 +47,7 @@ const Register: FC<Props> = (props: Props) => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>تسجيل مستخدم جديد</IonTitle>
+                    <IonTitle>{messages.REGISTER}</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
@@ -57,7 +58,7 @@ const Register: FC<Props> = (props: Props) => {
                                 <IonList>
                                     <IonItem className="mb-2">
                                         <IonInput
-                                            placeholder="البريد الإلكتروني"
+                                            placeholder={messages.EMAIL_ADDRESS}
                                             type="email"
                                             value={formState.controls.email.value}
                                             onIonChange={(e: CustomEvent<any>) => { changeHandler(e, 'email') }}
@@ -67,9 +68,9 @@ const Register: FC<Props> = (props: Props) => {
 
                                     {
                                         !formState.controls.email.validity &&
-                                        <span className="error">ادخل بريد الكتروني صحيح</span>
+                                        <span className="error">{messages.WRONGE_EMAIL_ADDRESS}</span>
                                     }
-                                    
+
                                     {
                                         serverError &&
                                         <span className="error">{serverError}</span>
@@ -77,7 +78,7 @@ const Register: FC<Props> = (props: Props) => {
 
                                     <IonItem className="mb-2">
                                         <IonInput
-                                            placeholder="كلمة المرور"
+                                            placeholder={messages.PASSWORD}
                                             type="password"
                                             value={formState.controls.password.value}
                                             onIonChange={(e: any) => changeHandler(e, 'password')}
@@ -87,25 +88,25 @@ const Register: FC<Props> = (props: Props) => {
 
                                     {
                                         !formState.controls.password.validity &&
-                                        <span className="error">ادخل كلمة مرور صحيحة</span>
+                                        <span className="error">{messages.WRONGE_PASSWORD}</span>
                                     }
                                 </IonList>
                             </IonCol>
                         </IonRow>
                         <IonRow>
                             <IonCol size="12" size-md>
-                                <IonButton color="success" onClick={onSubmit} expand="block" fill="solid">التسجيل</IonButton>
+                                <IonButton color="success" onClick={onSubmit} expand="block" fill="solid">{messages.REGISTER}</IonButton>
                             </IonCol>
                         </IonRow>
 
                         <IonRow>
                             <IonCol size="12">
                                 <IonButton expand="block" fill="clear" onClick={() => history.replace('/login')} className="ion-text-center">
-                                    تسجيل الدخول
+                                    {messages.LOGIN}
                                 </IonButton>
 
                                 <IonButton expand="block" fill="clear" onClick={() => history.replace('/categories')} className="ion-text-center">
-                                    الإستمرار بدون تسجيل
+                                    {messages.ACCESS_AS_GUEST}
                                 </IonButton>
                             </IonCol>
                         </IonRow>
