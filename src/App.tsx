@@ -35,8 +35,11 @@ import { AuthContext } from './context/auth.context';
 import { onValue, ref } from 'firebase/database';
 import { AllData } from './pages/types';
 import DB from './firebase/fetch';
+import Settings from './pages/Settings';
 
-setupIonicReact();
+setupIonicReact({
+  mode: 'ios'
+});
 
 const App: FC = () => {
   const authContext = useContext(AuthContext);
@@ -73,10 +76,14 @@ const App: FC = () => {
             <Route exact path="/login">
               <Login />
             </Route>
-            
+
             {/* <Route exact path="/register">
               <Register />
             </Route> */}
+
+            <Route exact path="/settings">
+              <Settings />
+            </Route>
 
             <Route exact path="/categories">
               <Categories />

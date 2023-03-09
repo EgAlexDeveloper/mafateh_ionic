@@ -1,22 +1,22 @@
 @import './fonts.css';
 
-.text {
+.card-content-ios p.text {
     font-family: 'NotoNaskhArabic';
     font-size: 20px;
     font-weight: 400;
     position: relative;
 }
 
-.ayat {
+.card-content-ios p.ayat {
     font-family: 'Quran';
     font-size: 20px;
     font-weight: bold;
-    border-bottom: solid 1px #ddd;
+    /* border-bottom: solid 1px #ddd; */
     position: relative;
     display: inline-block;
     line-height: normal;
     margin: 0;
-    color: var(--custom-color-mafateh-green)
+    color: var(--ion-color-success)
 }
 
 p:not(.ayat) {

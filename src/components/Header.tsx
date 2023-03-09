@@ -1,35 +1,39 @@
 import { IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon } from '@ionic/react';
-import { settingsSharp } from 'ionicons/icons';
+import { settingsSharp, arrowRedo } from 'ionicons/icons';
 import { FC } from 'react';
+import { useHistory } from 'react-router-dom';
+import messages from '../assets/messages';
 
 type Props = {
     title: string,
-    hasSettings?: boolean,
+    hideSettings?: boolean,
     hasBack?: boolean,
     backRoute?: string
 }
 
 const Header: FC<Props> = (props: Props) => {
+    const history = useHistory();
+
     return (
         <IonHeader>
             <IonToolbar>
                 {
-                    props.hasSettings &&
-                    <IonButtons slot="secondary">
-                        <IonButton>
-                            <IonIcon slot="icon-only" icon={settingsSharp} />
+                    !props.hideSettings &&
+                    <IonButtons slot="end">
+                        <IonButton onClick={() => history.replace('/settings')}>
+                            <IonIcon size='small' color="dark" slot="icon-only" icon={settingsSharp} />
                         </IonButton>
                     </IonButtons>
                 }
 
+                <IonTitle color="dark">{props.title}</IonTitle>
+
                 {
                     props.hasBack &&
                     <IonButtons slot="start">
-                        <IonBackButton defaultHref={props.backRoute!} />
+                        <IonIcon color="dark" onClick={() => history.replace(props.backRoute!)} icon={arrowRedo} />
                     </IonButtons>
                 }
-
-                <IonTitle>{props.title}</IonTitle>
             </IonToolbar>
 
         </IonHeader>

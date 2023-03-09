@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonGrid, IonCol, IonRow } from '@ionic/react';
+import { IonContent, IonPage, IonGrid, IonCol, IonRow, IonCard, IonCardContent } from '@ionic/react';
 import { useEffect, useState, Fragment } from 'react';
 
 import { useParams } from 'react-router';
@@ -36,14 +36,15 @@ const Post: React.FC = () => {
       <Header title={post_name} hasBack={true} backRoute={`/posts/${cat_id}/${cat_name}`} />
 
       <IonContent fullscreen>
-        <IonGrid>
-          <IonRow>
-            {
-              post?.details!.map((item, i) => (
-                <Fragment key={new Date().getTime()}>
-                  <IonCol size='12'>
+        {
+          post?.details!.map((item, i) => (
+            <>
+              {
+                item.type &&
+                <IonCard key={new Date().getTime()}>
+                  <IonCardContent>
                     {
-                      item.type == 1 && <Text text={item.details as string} />
+                      (item.type == 1 && item.details.length > 0) && <Text text={item.details as string} />
                     }
 
                     {
@@ -72,12 +73,12 @@ const Post: React.FC = () => {
                         }
                       </div>
                     }
-                  </IonCol>
-                </Fragment>
-              ))
-            }
-          </IonRow>
-        </IonGrid>
+                  </IonCardContent>
+                </IonCard>
+              }
+            </>
+          ))
+        }
       </IonContent>
     </IonPage>
   );

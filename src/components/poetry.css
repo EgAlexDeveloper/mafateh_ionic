@@ -1,8 +1,8 @@
 .poetry {
-    padding: 0 0 20px 0;
-    margin: 0 0 20px 0;
+    padding: 0;
+    margin: 0;
     list-style: none;
-    border-bottom: solid 1px #ddd;
+    /* border-bottom: solid 1px #ddd; */
     font-family: 'NotoNaskhArabic';
     font-size: 18px;
 }

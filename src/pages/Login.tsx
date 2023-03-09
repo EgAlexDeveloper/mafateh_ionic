@@ -1,4 +1,4 @@
-import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, IonList, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
+import { IonButton, IonCol, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonNote, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
 import { FC, useContext, useState } from "react";
 
 import { FormGroup, FormControl, Validators, BaseValidator } from 'ms-react-reactive-form';
@@ -9,7 +9,9 @@ import { useHistory } from "react-router-dom";
 import { saveData } from "../db";
 import { UserCredential } from "firebase/auth";
 import { AuthContext } from "../context/auth.context";
+
 import messages from "../assets/messages";
+import Header from "../components/Header";
 
 type Props = {};
 
@@ -67,83 +69,74 @@ const Login: FC<Props> = (props: Props) => {
 
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>{messages.LOGIN}</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-            <IonContent>
-                <IonGrid>
-                    <form onSubmit={onSubmit}>
-                        <IonRow>
-                            <IonCol>
-                                <IonList>
-                                    <IonItem className="mb-2">
-                                        <IonInput
-                                            placeholder={messages.EMAIL_ADDRESS}
-                                            type="email"
-                                            value={formState.controls.email.value}
-                                            onIonChange={(e: CustomEvent<any>) => { changeHandler(e, 'email') }}
-                                        >
-                                        </IonInput>
-                                    </IonItem>
+            <Header title={messages.LOGIN} hasBack={false} hideSettings={true} />
+            <IonContent fullscreen>
+                <form onSubmit={onSubmit}>
+                    <IonList lines="full" className="ion-margin-bottom">
+                        <IonItem
+                            fill="solid"
+                            className={`${formState.controls.email.validity && 'ion-valid'} 
+                                ${!formState.controls.email.validity && 'ion-invalid'}`}
+                        >
+                            <IonLabel position="floating">{messages.EMAIL_ADDRESS}</IonLabel>
+                            <IonInput
+                                placeholder={messages.EMAIL_ADDRESS}
+                                type="email"
+                                value={formState.controls.email.value}
+                                onIonChange={(e: CustomEvent<any>) => { changeHandler(e, 'email') }}
+                            >
+                            </IonInput>
 
-                                    {
-                                        !formState.controls.email.validity &&
-                                        <span className="error">{messages.WRONGE_EMAIL_ADDRESS}</span>
-                                    }
+                            {
+                                !formState.controls.email.validity &&
+                                <IonNote slot="error">{messages.WRONGE_EMAIL_ADDRESS}</IonNote >
+                            }
 
-                                    {
-                                        EMAIL_NOT_FOUND &&
-                                        <span className="error">{EMAIL_NOT_FOUND}</span>
-                                    }
+                            {
+                                EMAIL_NOT_FOUND &&
+                                <IonNote slot="error">{EMAIL_NOT_FOUND}</IonNote>
+                            }
+                        </IonItem>
 
-                                    <IonItem className="mb-2">
-                                        <IonInput
-                                            placeholder={messages.PASSWORD}
-                                            type="password"
-                                            value={formState.controls.password.value}
-                                            onIonChange={(e: any) => changeHandler(e, 'password')}
-                                        >
-                                        </IonInput>
-                                    </IonItem>
+                        <IonItem
+                            fill="solid"
+                            className={`${formState.controls.password.validity && 'ion-valid'} 
+                                ${!formState.controls.password.validity && 'ion-invalid'}`}
+                        >
+                            <IonLabel position="floating">{messages.PASSWORD}</IonLabel>
+                            <IonInput
+                                placeholder={messages.PASSWORD}
+                                type="password"
+                                value={formState.controls.password.value}
+                                onIonChange={(e: any) => changeHandler(e, 'password')}
+                            >
+                            </IonInput>
 
-                                    {
-                                        !formState.controls.password.validity &&
-                                        <span className="error">{messages.WRONGE_PASSWORD}</span>
-                                    }
+                            {
+                                !formState.controls.password.validity &&
+                                <IonNote slot="error">{messages.WRONGE_PASSWORD}</IonNote>
+                            }
 
-                                    {
-                                        INVALID_PASSWORD &&
-                                        <div className="error">{INVALID_PASSWORD}</div>
-                                    }
+                            {
+                                INVALID_PASSWORD &&
+                                <IonNote slot="error">{INVALID_PASSWORD}</IonNote>
+                            }
 
-                                    {
-                                        TOO_MANY_REQUESTS &&
-                                        <div className="error">{TOO_MANY_REQUESTS}</div>
-                                    }
-                                </IonList>
-                            </IonCol>
-                        </IonRow>
-                        <IonRow>
-                            <IonCol size="12" size-md>
-                                <IonButton color="success" onClick={onSubmit} expand="block" fill="solid">{messages.LOGIN}</IonButton>
-                            </IonCol>
-                        </IonRow>
+                            {
+                                TOO_MANY_REQUESTS &&
+                                <IonNote slot="error">{TOO_MANY_REQUESTS}</IonNote>
+                            }
+                        </IonItem>
+                    </IonList>
 
-                        <IonRow>
-                            <IonCol size="12">
-                                {/* <IonButton expand="block" fill="clear" onClick={() => history.replace('/register')} className="ion-text-center">
-                                   {messages.REGISTER}
-                                </IonButton> */}
+                    <IonButton color="dark" expand="full" fill="solid" onClick={onSubmit}>
+                        {messages.LOGIN}
+                    </IonButton>
 
-                                <IonButton expand="block" fill="clear" onClick={() => history.replace('/categories')} className="ion-text-center">
-                                    {messages.ACCESS_AS_GUEST}
-                                </IonButton>
-                            </IonCol>
-                        </IonRow>
-                    </form>
-                </IonGrid>
+                    <IonButton size="small" color="success" expand="block" fill="clear" onClick={() => history.replace('/categories')} className="ion-text-center">
+                        {messages.ACCESS_AS_GUEST}
+                    </IonButton>
+                </form>
             </IonContent>
         </IonPage>
     )

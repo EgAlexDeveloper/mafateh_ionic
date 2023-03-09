@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonList, IonLabel, IonListHeader, IonButton, IonIcon } from '@ionic/react';
+import { IonContent, IonPage, IonList, IonLabel, IonListHeader, IonButton, IonIcon, IonItem } from '@ionic/react';
 import { useContext, useEffect, useState } from 'react';
 
 import * as icons from 'ionicons/icons';
@@ -33,18 +33,16 @@ const Categories: React.FC = () => {
 
   return (
     <IonPage>
-      <Header title={messages.INDEX} hasSettings={false} />
+      <Header title={messages.INDEX} hideSettings={false} hasBack={false} />
 
       <IonContent fullscreen>
         <IonList>
           {
             cat.map(item => (
-              <IonListHeader lines="full" key={item.id} onClick={() => history.replace(`/posts/${item.id}/${item.name}`)}>
-                <IonLabel className="ion-bold">{item.name}</IonLabel>
-                <IonButton>
-                  <IonIcon icon={icons.chevronBackOutline} />
-                </IonButton>
-              </IonListHeader>
+              <IonItem key={item.id} onClick={() => history.replace(`/posts/${item.id}/${item.name}`)}>
+                <IonLabel color="success">{item.name}</IonLabel>
+                <IonIcon size='small' color="dark" icon={icons.chevronBackOutline} />
+              </IonItem>
             ))
           }
         </IonList>

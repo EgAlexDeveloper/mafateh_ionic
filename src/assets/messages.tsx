@@ -7,7 +7,9 @@ const messages = {
     "REGISTER": "التسجيل",
     "LOGIN": "تسجيل الدخول",
     "ACCESS_AS_GUEST": "الإستمرار بدون تسجيل",
-    "INDEX": "فهرس الأوراد"
+    "INDEX": "فهرس الأوراد",
+    "SETTINGS": "الإعدادات",
+    "BACK": "الرجوع"
 }
 
 export default messages;

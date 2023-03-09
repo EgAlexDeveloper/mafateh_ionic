@@ -1,3 +1,4 @@
+import { IonCard, IonCardHeader, IonCardTitle } from "@ionic/react";
 import { FC } from "react";
 
 type Props = {
@@ -5,13 +6,13 @@ type Props = {
 };
 
 const Ayat: FC<Props> = (props: Props) => {
-    return (<>
+    return (
         <p className="ayat">
             <span className="bahij">﴿</span>
             <span>{props.text}</span>
             <span className="bahij">﴾</span>
         </p>
-    </>)
+    )
 }
 
 export default Ayat;

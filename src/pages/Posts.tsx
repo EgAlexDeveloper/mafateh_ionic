@@ -1,4 +1,4 @@
-import { IonContent, IonPage, IonList, IonListHeader, IonLabel, IonButton, IonIcon } from '@ionic/react';
+import { IonContent, IonPage, IonList, IonListHeader, IonLabel, IonButton, IonIcon, IonItem } from '@ionic/react';
 import { Fragment, useContext, useEffect, useState } from 'react';
 
 import * as icons from 'ionicons/icons'
@@ -36,17 +36,15 @@ const Posts: React.FC = () => {
     <IonPage>
       <Header title={cat_name} hasBack={true} backRoute="/categories" />
 
-      <IonContent fullscreen>
+      <IonContent fullscreen scrollY={true}>
         <IonList>
           {
             posts.map((item, i) => (
               <Fragment key={i}>
-                <IonListHeader lines="full" onClick={() => history.replace(`/post/${cat_id}/${cat_name}/${item.name}`)}>
-                  <IonLabel>{item.name}</IonLabel>
-                  <IonButton>
-                    <IonIcon icon={icons.chevronBackOutline} />
-                  </IonButton>
-                </IonListHeader>
+                <IonItem onClick={() => history.replace(`/post/${cat_id}/${cat_name}/${item.name}`)}>
+                  <IonLabel color="success">{item.name}</IonLabel>
+                  <IonIcon size='small' color="dark" icon={icons.chevronBackOutline} />
+                </IonItem>
               </Fragment>
             ))
           }
