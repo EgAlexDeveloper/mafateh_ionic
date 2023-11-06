@@ -1,38 +1,57 @@
 @import './fonts.css';
 
+p {
+    margin-bottom: 15px !important;
+    display: flex;
+    justify-content: start;
+    align-content: flex-start;
+}
+
 .card-content-ios p.text {
     font-family: 'NotoNaskhArabic';
-    font-size: 20px;
+    /* font-size: 20px; */
     font-weight: 400;
-    position: relative;
+    /* position: relative; */
+    text-align: justify;
 }
 
 .card-content-ios p.ayat {
     font-family: 'Quran';
-    font-size: 20px;
+    /* font-size: 20px; */
     font-weight: bold;
     /* border-bottom: solid 1px #ddd; */
-    position: relative;
+    /* position: relative; */
     display: inline-block;
     line-height: normal;
-    margin: 0;
-    color: var(--ion-color-success)
+    color: var(--ion-color-success);
+    text-align: justify;
 }
 
 p:not(.ayat) {
-    margin: 0;
+    /* margin: 0; */
     font-family: 'NotoNaskhArabic';
+    text-align: justify;
 }
 
 .bahij {
     font-family: "Bahij";
 }
 
-.mixedContent p {
-    margin-left: 10px;
-    display: inline;
+.mixedContent {
+    /* display: flex;
+    justify-content: start;
+    align-content: flex-start; */
+    margin-bottom: 15px;
+    display: table;
 }
 
-.mixedContent p:last-of-type {
-    margin-left: 0;
+.mixedContent p {
+    display: inline !important;
+    vertical-align: middle;
+    margin-bottom: 0 !important;
+    line-height: normal !important;
+}
+
+.mixedContent p:first-of-type {
+    margin-left: 5px !important;
 }

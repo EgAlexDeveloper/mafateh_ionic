@@ -17,14 +17,14 @@ const Header: FC<Props> = (props: Props) => {
     return (
         <IonHeader>
             <IonToolbar>
-                {
+                {/* {
                     !props.hideSettings &&
                     <IonButtons slot="end">
                         <IonButton onClick={() => history.replace('/settings')}>
                             <IonIcon size='small' color="dark" slot="icon-only" icon={settingsSharp} />
                         </IonButton>
                     </IonButtons>
-                }
+                } */}
 
                 <IonTitle color="dark">{props.title}</IonTitle>
 

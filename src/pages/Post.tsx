@@ -36,49 +36,51 @@ const Post: React.FC = () => {
       <Header title={post_name} hasBack={true} backRoute={`/posts/${cat_id}/${cat_name}`} />
 
       <IonContent fullscreen>
-        {
-          post?.details!.map((item, i) => (
-            <>
-              {
-                item.type &&
-                <IonCard key={new Date().getTime()}>
-                  <IonCardContent>
-                    {
-                      (item.type == 1 && item.details.length > 0) && <Text text={item.details as string} />
-                    }
+        <IonCard key={new Date().getTime()}>
+          <IonCardContent>
+            {
+              post?.details!.map((item, i) => (
+                <>
+                  {
+                    item.type &&
+                    <>
+                      {
+                        (item.type == 1 && item.details.length > 0) && <Text text={item.details as string} />
+                      }
 
-                    {
-                      item.type == 2 && <Ayat text={item.details as string} />
-                    }
+                      {
+                        item.type == 2 && <Ayat text={item.details as string} />
+                      }
 
-                    {
-                      (item.type == 3 || item.type == 33) && <Poetry type={item.type} list={item.details as string[][]} />
-                    }
+                      {
+                        (item.type == 3 || item.type == 33) && <Poetry type={item.type} list={item.details as string[][]} />
+                      }
 
-                    {
-                      item.type == 4 &&
-                      <div className='mixedContent'>
-                        {
-                          [...item.details as MixedType[]].map((detail: MixedType, i) => (
-                            <Fragment key={new Date().getTime()}>
-                              {
-                                detail.type == 1 && <Text text={detail.text as string} />
-                              }
+                      {
+                        item.type == 4 &&
+                        <div className='mixedContent'>
+                          {
+                            [...item.details as MixedType[]].map((detail: MixedType, i) => (
+                              <Fragment key={new Date().getTime()}>
+                                {
+                                  detail.type == 1 && <Text text={detail.text as string} />
+                                }
 
-                              {
-                                detail.type == 2 && <Ayat text={detail.text as string} />
-                              }
-                            </Fragment>
-                          ))
-                        }
-                      </div>
-                    }
-                  </IonCardContent>
-                </IonCard>
-              }
-            </>
-          ))
-        }
+                                {
+                                  detail.type == 2 && <Ayat text={detail.text as string} />
+                                }
+                              </Fragment>
+                            ))
+                          }
+                        </div>
+                      }
+                    </>
+                  }
+                </>
+              ))
+            }
+          </IonCardContent>
+        </IonCard>
       </IonContent>
     </IonPage>
   );
