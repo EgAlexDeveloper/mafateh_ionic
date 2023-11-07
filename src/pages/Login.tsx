@@ -1,5 +1,5 @@
 import { IonButton, IonCard, IonCardContent, IonCol, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonNote, IonPage, IonRow, IonTitle, IonToolbar } from "@ionic/react";
-import { FC, useContext, useState } from "react";
+import React, { FC, useContext, useState } from "react";
 
 import { FormGroup, FormControl, Validators, BaseValidator } from 'ms-react-reactive-form';
 import { signin } from "../firebase/auth";
@@ -41,8 +41,8 @@ const Login: FC<Props> = (props: Props) => {
                     signin(res.payload as LoginPayload)
                         .then((res: UserCredential) => {
                             saveData(JSON.stringify(res.user), 'user');
-                            authContext?.updateIsLoggedInState(true);
-                            authContext?.updateUserState(res);
+                            authContext!.updateIsLoggedInState(true);
+                            authContext!.updateUserState(res);
                             history.replace('/categories');
                         })
                         .catch(error => {

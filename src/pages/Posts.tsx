@@ -1,5 +1,5 @@
-import { IonContent, IonPage, IonList, IonListHeader, IonLabel, IonButton, IonIcon, IonItem } from '@ionic/react';
-import { Fragment, useContext, useEffect, useState } from 'react';
+import { IonContent, IonPage, IonList, IonLabel, IonIcon, IonItem } from '@ionic/react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 
 import * as icons from 'ionicons/icons'
 import { useParams } from 'react-router';

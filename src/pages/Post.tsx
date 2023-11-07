@@ -1,5 +1,5 @@
 import { IonContent, IonPage, IonGrid, IonCol, IonRow, IonCard, IonCardContent } from '@ionic/react';
-import { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 
 import { useParams } from 'react-router';
 
@@ -26,7 +26,7 @@ const Post: React.FC = () => {
   const filterPost = (): void => {
     fetchData('all')
       .then((res: AllData) => {
-        let details: PostDetails = res.Content.find((item: PostDetails) => item && item?.name! == post_name)!;
+        let details: PostDetails = res.Content.find((item: PostDetails) => item && item!.name! == post_name)!;
         updatePost(details);
       });
   }
@@ -39,7 +39,7 @@ const Post: React.FC = () => {
         <IonCard key={new Date().getTime()}>
           <IonCardContent>
             {
-              post?.details!.map((item, i) => (
+              post!.details!.map((item, i) => (
                 <>
                   {
                     item.type &&

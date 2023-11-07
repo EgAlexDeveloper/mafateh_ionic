@@ -1,5 +1,5 @@
 import { IonContent, IonPage, IonList, IonLabel, IonListHeader, IonButton, IonIcon, IonItem } from '@ionic/react';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import * as icons from 'ionicons/icons';
 

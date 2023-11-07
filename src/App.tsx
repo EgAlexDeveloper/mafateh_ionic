@@ -29,7 +29,6 @@ import { FC, useEffect, useState, useContext } from 'react';
 
 import './Styles.css';
 import Login from './pages/Login';
-import Register from './pages/Register';
 import { fetchData, saveData } from './db';
 import { AuthContext } from './context/auth.context';
 import { onValue, ref } from 'firebase/database';
@@ -60,7 +59,7 @@ const App: FC = () => {
       .then(res => {
         if (res) {
           authContext!.updateIsLoggedInState(true);
-          authContext?.updateUserState(res);
+          authContext!.updateUserState(res);
           updateIsLoggedIn(true);
         }
       })

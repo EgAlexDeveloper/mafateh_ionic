@@ -1,5 +1,5 @@
 import { IonCard, IonCardHeader, IonCardTitle } from "@ionic/react";
-import { FC } from "react";
+import  React, { FC } from "react";
 
 type Props = {
     text: string

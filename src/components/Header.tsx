@@ -1,6 +1,6 @@
 import { IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonButton, IonIcon } from '@ionic/react';
 import { settingsSharp, arrowRedo } from 'ionicons/icons';
-import { FC } from 'react';
+import  React, { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import messages from '../assets/messages';
 
