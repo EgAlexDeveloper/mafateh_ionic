@@ -1,35 +1,35 @@
-import { IonContent, IonPage, IonList, IonLabel, IonListHeader, IonButton, IonIcon, IonItem } from '@ionic/react';
-import { useContext, useEffect, useState } from 'react';
+import { IonContent, IonPage, IonList, IonLabel, IonIcon, IonItem } from '@ionic/react';
+import React, {  useState } from 'react';
 
 import * as icons from 'ionicons/icons';
 
 import './Cat.css';
-import { AllData, Cat } from './types';
+import { Cat, Cats } from './types';
 import Header from '../components/Header';
 import { useHistory } from 'react-router-dom';
-import { fetchData } from '../db';
-import { AuthContext } from '../context/auth.context';
+// import { fetchData } from '../db';
+// import { AuthContext } from '../context/auth.context';
 import messages from '../assets/messages';
 
 const Categories: React.FC = () => {
   const history = useHistory();
-  const authContext = useContext(AuthContext);
-  const [cat, updateCat] = useState<Cat[]>([]);
+  // const authContext = useContext(AuthContext);
+  const [cat, updateCat] = useState<Cat[]>(Cats);
 
-  useEffect(() => {
-    filterCats(authContext!.getIsLoggedInState());
-  }, [authContext!.getIsLoggedInState]);
+  // useEffect(() => {
+  //   filterCats(authContext!.getIsLoggedInState());
+  // }, [authContext!.getIsLoggedInState]);
 
-  useEffect(() => {
-    return () => updateCat([]);
-  }, []);
+  // useEffect(() => {
+  //   return () => updateCat([]);
+  // }, []);
 
-  const filterCats = (isLoggedIn: boolean): void => {
-    fetchData('all')
-      .then((res: AllData) => {
-        updateCat(isLoggedIn ? [...res.Cats] : [...res.Cats.filter(x => !x.is_private)]);
-      });
-  }
+  // const filterCats = (isLoggedIn: boolean): void => {
+  //   fetchData('all')
+  //     .then((res: AllData) => {
+  //       updateCat(isLoggedIn ? [...res.Cats] : [...res.Cats.filter(x => !x.is_private)]);
+  //     });
+  // }
 
   return (
     <IonPage>

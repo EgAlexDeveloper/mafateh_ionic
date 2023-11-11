@@ -1,14 +1,15 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { createRoot } from 'react-dom/client';
 
 import './assets/css/main.css';
 import AuhtProvider from './context/auth.context';
 
-const rootNode = document.getElementById('root');
-ReactDOM.render(<AuhtProvider><App /></AuhtProvider>, rootNode);
+const container = document.getElementById('root');
+const root = createRoot(container!); // createRoot(container!) if you use TypeScript
+root.render(<AuhtProvider><App /></AuhtProvider>);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

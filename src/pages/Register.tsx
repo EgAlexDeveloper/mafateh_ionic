@@ -2,8 +2,8 @@ import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonInput, IonItem, I
 import { FC, FormEvent, useState } from "react";
 
 import { FormGroup, FormControl, Validators, BaseValidator } from 'ms-react-reactive-form';
-import { register, signin } from "../firebase/auth";
-import { LoginPayload } from "../firebase/types";
+// import { register, signin } from "../firebase/auth";
+// import { LoginPayload } from "../firebase/types";
 import { useHistory } from "react-router-dom";
 import messages from "../assets/messages";
 
@@ -28,9 +28,9 @@ const Register: FC<Props> = (props: Props) => {
             .then(controls => {
                 let res = validate.result(controls);
                 if (res.form.validity) {
-                    register(res.payload as LoginPayload)
-                        .then(res => history.replace('/login'))
-                        .catch(error => updateServerError(messages.REGISTERED_EMAIL));
+                    // register(res.payload as LoginPayload)
+                    //     .then(res => history.replace('/login'))
+                    //     .catch(error => updateServerError(messages.REGISTERED_EMAIL));
                 } else {
                     updateFormState({ ...res.form })
                 }

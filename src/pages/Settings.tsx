@@ -12,7 +12,7 @@ import {
     IonChip,
 } from '@ionic/react';
 
-import { FC } from 'react';
+import React, { FC } from 'react';
 import messages from '../assets/messages';
 
 const Settings: FC = () => {

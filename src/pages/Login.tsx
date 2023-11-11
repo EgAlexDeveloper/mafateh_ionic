@@ -2,12 +2,12 @@ import { IonButton, IonCard, IonCardContent, IonCol, IonContent, IonHeader, IonI
 import { FC, useContext, useState } from "react";
 
 import { FormGroup, FormControl, Validators, BaseValidator } from 'ms-react-reactive-form';
-import { signin } from "../firebase/auth";
-import { LoginPayload } from "../firebase/types";
+// import { signin } from "../firebase/auth";
+// import { LoginPayload } from "../firebase/types";
 
 import { useHistory } from "react-router-dom";
-import { saveData } from "../db";
-import { UserCredential } from "firebase/auth";
+// import { saveData } from "../db";
+// import { UserCredential } from "firebase/auth";
 import { AuthContext } from "../context/auth.context";
 
 import messages from "../assets/messages";
@@ -38,20 +38,20 @@ const Login: FC<Props> = (props: Props) => {
             .then(controls => {
                 let res = validate.result(controls);
                 if (res.form.validity) {
-                    signin(res.payload as LoginPayload)
-                        .then((res: UserCredential) => {
-                            saveData(JSON.stringify(res.user), 'user');
-                            authContext?.updateIsLoggedInState(true);
-                            authContext?.updateUserState(res);
-                            history.replace('/categories');
-                        })
-                        .catch(error => {
-                            const errorMessage = error.code;
+                    // signin(res.payload as LoginPayload)
+                    //     .then((res: UserCredential) => {
+                    //         saveData(JSON.stringify(res.user), 'user');
+                    //         authContext?.updateIsLoggedInState(true);
+                    //         authContext?.updateUserState(res);
+                    //         history.replace('/categories');
+                    //     })
+                    //     .catch(error => {
+                    //         const errorMessage = error.code;
 
-                            if (errorMessage == 'auth/too-many-requests') update_TOO_MANY_REQUESTS("تم ادخال البريد الاكتروني او كلمة المرور اكثر من مرة بطريقة خاطأ حاول في وقت لاحق")
-                            if (errorMessage == 'auth/wrong-password') update_INVALID_PASSWORD("كلمة المرور المدخلة غير مرتبطة بالابريد الالكتروني المدخل")
-                            if (errorMessage == 'auth/user-not-found') update_EMAIL_NOT_FOUND('البريد الالكتروني المدخل غير مسجل')
-                        });
+                    //         if (errorMessage == 'auth/too-many-requests') update_TOO_MANY_REQUESTS("تم ادخال البريد الاكتروني او كلمة المرور اكثر من مرة بطريقة خاطأ حاول في وقت لاحق")
+                    //         if (errorMessage == 'auth/wrong-password') update_INVALID_PASSWORD("كلمة المرور المدخلة غير مرتبطة بالابريد الالكتروني المدخل")
+                    //         if (errorMessage == 'auth/user-not-found') update_EMAIL_NOT_FOUND('البريد الالكتروني المدخل غير مسجل')
+                    //     });
                 } else {
                     updateFormState({ ...res.form })
                 }

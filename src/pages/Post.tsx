@@ -1,34 +1,37 @@
-import { IonContent, IonPage, IonGrid, IonCol, IonRow, IonCard, IonCardContent } from '@ionic/react';
-import { useEffect, useState, Fragment } from 'react';
+import { IonContent, IonPage, IonCard, IonCardContent } from '@ionic/react';
+import React, { useEffect } from 'react';
 
 import { useParams } from 'react-router';
+import { Plugins } from '@capacitor/core';
 
-import Text from '../components/Text';
-import Ayat from '../components/Ayat';
-import Poetry from '../components/Poetry';
 
-import { AllData, MixedType, PostDetails } from './types';
+// import Text from '../components/Text';
+// import Ayat from '../components/Ayat';
+// import Poetry from '../components/Poetry';
+
+import { MixedType, PostDetails } from './types';
 import Header from '../components/Header';
-import { fetchData } from '../db';
+// import { fetchData } from '../db';
 
 const Post: React.FC = () => {
-  const [post, updatePost] = useState<PostDetails | null>();
+  // const [post, updatePost] = useState<PostDetails | null>();
   const { cat_name, cat_id, post_name } = useParams() as { cat_name: string; cat_id: string; post_name: string };
 
   useEffect(() => {
     filterPost();
   }, []);
 
-  useEffect(() => {
-    return () => updatePost(null)
-  }, []);
-
   const filterPost = (): void => {
-    fetchData('all')
-      .then((res: AllData) => {
-        let details: PostDetails = res.Content.find((item: PostDetails) => item && item?.name! == post_name)!;
-        updatePost(details);
-      });
+    // fetchData('all')
+    //   .then((res: AllData) => {
+    //     let details: PostDetails = res.Content.find((item: PostDetails) => item && item?.name! == post_name)!;
+    //     updatePost(details);
+    //   });
+
+    // alert(post_name)
+    const { Browser } = Plugins;
+
+    Browser.open({ url: '/assets/Pdf' })
   }
 
   return (
@@ -38,7 +41,7 @@ const Post: React.FC = () => {
       <IonContent fullscreen>
         <IonCard key={new Date().getTime()}>
           <IonCardContent>
-            {
+            {/* {
               post?.details!.map((item, i) => (
                 <>
                   {
@@ -78,7 +81,7 @@ const Post: React.FC = () => {
                   }
                 </>
               ))
-            }
+            } */}
           </IonCardContent>
         </IonCard>
       </IonContent>
